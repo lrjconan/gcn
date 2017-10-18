@@ -84,21 +84,21 @@ def load_data(dataset_str):
         data_folder = "data/diel_data/diel"
         
         x = load_sparse_csr(
-            os.path.join(data_folder, "{}.x.npz".format(diel_split_idx)))
+            os.path.join(data_folder, "{}".format(diel_split_idx), "{}.x.npz".format(diel_split_idx)))
         tx = load_sparse_csr(
-            os.path.join(data_folder, "{}.tx.npz".format(diel_split_idx)))
+            os.path.join(data_folder, "{}".format(diel_split_idx), "{}.tx.npz".format(diel_split_idx)))
         y = np.load(
-            os.path.join(data_folder, "{}.y.npy".format(diel_split_idx)))
+            os.path.join(data_folder, "{}".format(diel_split_idx), "{}.y.npy".format(diel_split_idx)))
         ty = np.load(
-            os.path.join(data_folder, "{}.ty.npy".format(diel_split_idx)))
+            os.path.join(data_folder, "{}".format(diel_split_idx), "{}.ty.npy".format(diel_split_idx)))
 
         features = sp.vstack([x, tx], format="csr").tolil()
         labels = np.vstack((y, ty))
         
-        graph, id2index = pickle.load(open(os.path.join(data_folder, "{}_graph.p".format(diel_split_idx))))
-        train_list = pickle.load(open(os.path.join(data_folder, "{}_train_list.p".format(diel_split_idx))))
-        test_list = pickle.load(open(os.path.join(data_folder, "{}_test_list.p".format(diel_split_idx))))
-        test_cov = pickle.load(open(os.path.join(data_folder, "{}_test_cov.p".format(diel_split_idx))))
+        graph, id2index = pickle.load(open(os.path.join(data_folder, "{}".format(diel_split_idx), "{}_graph.p".format(diel_split_idx))))
+        train_list = pickle.load(open(os.path.join(data_folder, "{}".format(diel_split_idx), "{}_train_list.p".format(diel_split_idx))))
+        test_list = pickle.load(open(os.path.join(data_folder, "{}".format(diel_split_idx), "{}_test_list.p".format(diel_split_idx))))
+        test_cov = pickle.load(open(os.path.join(data_folder, "{}".format(diel_split_idx), "{}_test_cov.p".format(diel_split_idx))))
         cites, s_graph = read_cites(data_folder + '/hasItem.cfacts')
         sim_dict = read_sim_dict(data_folder + '/sim.dict')
 
